@@ -27,8 +27,8 @@ cd sdl2-game-starter
 
 ## Web app
 
-![](./docs/screenshot_web.png)
+<img width="480px" src="./docs/screenshot_web.png">
 
 ## Mac OS X native app
 
-![](./docs/screenshot_macos.png)
+<img width="480px" src="./docs/screenshot_macos.png">
