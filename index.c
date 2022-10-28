@@ -2,34 +2,46 @@
 #include <emscripten.h>
 #include <stdlib.h>
 
-SDL_Surface *screen;
+SDL_Window *window;
+SDL_Renderer *renderer;
+SDL_Surface *surface;
 
 void drawRandomPixels() {
-    if (SDL_MUSTLOCK(screen)) SDL_LockSurface(screen);
+    if (SDL_MUSTLOCK(surface)) 
+        SDL_LockSurface(surface);
 
-    Uint8 * pixels = screen->pixels;
+    Uint8 * pixels = surface->pixels;
     
     for (int i=0; i < 32 * 32 * 4; i++) {
         char randomByte = rand() % 255;
         pixels[i] = randomByte;
     }
 
-    if (SDL_MUSTLOCK(screen)) SDL_UnlockSurface(screen);
+    if (SDL_MUSTLOCK(surface))
+        SDL_UnlockSurface(surface);
 
-    SDL_Flip(screen);
+    SDL_Texture *screenTexture = SDL_CreateTextureFromSurface(renderer, surface);
+
+    SDL_RenderClear(renderer);
+    SDL_RenderCopy(renderer, screenTexture, NULL, NULL);
+    SDL_RenderPresent(renderer);
+
+    SDL_DestroyTexture(screenTexture);
+
 }
 
 int main(int argc, char* argv[]) {
     
     SDL_Init(SDL_INIT_VIDEO);
 
-    EM_ASM(
-        SDL.defaults.copyOnLock = false;
-        SDL.defaults.discardOnLock = true;
-        SDL.defaults.opaqueFrontBuffer = false;
-    );
+    // EM_ASM(
+    //     SDL.defaults.copyOnLock = false;
+    //     SDL.defaults.discardOnLock = true;
+    //     SDL.defaults.opaqueFrontBuffer = false;
+    // );
 
-    screen = SDL_SetVideoMode(32, 32, 32, SDL_SWSURFACE);
+    SDL_CreateWindowAndRenderer(32, 32, 0, &window, &renderer);
+    surface = SDL_CreateRGBSurface(0, 32, 32, 32, 0, 0, 0, 0);
     
     emscripten_set_main_loop(drawRandomPixels, 0, 1);
 }
