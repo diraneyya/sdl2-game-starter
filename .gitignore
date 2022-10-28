@@ -1,2 +1,6 @@
+.DS_Store
 index.wasm
 index.mjs
+index.app
+index.app.dSym
+/Frameworks/*
