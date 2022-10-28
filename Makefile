@@ -4,8 +4,8 @@ SDL2_DMG_FILEPATH=$(FRAMEWORKS_DIR)/sdl2.dmg
 SDL2_MOUNTROOT=$(FRAMEWORKS_DIR)/SDL2
 emcc_command=$(command -v emcc)
 
-# Empty wasm target, depends on "index.wasm"
-wasm: index.wasm
+# Empty web target, depends on "index.wasm"
+web: index.wasm
 
 # Empty macosx target, depends on "index.app"
 macos: index.app
