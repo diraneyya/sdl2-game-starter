@@ -1,5 +1,7 @@
 # SDL2 Game Template
 
+> Preview link: https://diraneyya.github.io/sdl2-game-starter/
+
 This is a minimal C program that can be built into web and native targets (currently, only Mac OS X is supported).
 
 ![](./docs/sdl2_diagram.svg)
