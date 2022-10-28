@@ -1,4 +1,5 @@
 .DS_Store
+**/*.bkp
 index.wasm
 index.mjs
 index.app
