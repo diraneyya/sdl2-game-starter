@@ -9,16 +9,26 @@
     #canvas {
       image-rendering: pixelated;
       width: 100%;
+      max-width: 512px;
       aspect-ratio: 1 / 1;
     }
   </style>
 </head>
 <body>
-  <h1>SDL2 WASM Game Loader</h1>
-  <canvas id="canvas"></canvas>
-  <script type="module">
-    import initModule from './index.mjs';
+  <h1>SDL2 Game Starter</h1>
 
+  
+  <h2>Web version</h2>
+  <canvas id="canvas"></canvas>
+
+  <h2>Native versions</h2>
+  <ul>
+    <li>Mac OS X (Apple Silicone): <a href="./index.app" target="_blank">click here</a></li>
+  </ul>
+
+<script type="module">
+    import initModule from './index.mjs';
+    
     var Module = await initModule({
       canvas: document.getElementById('canvas')
     });
